@@ -1,6 +1,4 @@
-from datetime import timezone
 import random
-import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
