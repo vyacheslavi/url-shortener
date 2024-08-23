@@ -7,4 +7,5 @@ urlpatterns = [
     path("api/v1/", include("api.urls")),
     path("<str:short_url>", services.redirection),
     path("api/v1/auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("", include("jinja.urls")),
 ]
