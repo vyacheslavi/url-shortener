@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block title %}
+Users
+{% endblock title%}
+
+{% block content %}
+<html>
+  <body class="bg-dark">
+    <div class="container-my mt-5 mb-2">
+        <div class="accordion accordion-flush" id="users-list"></div>
+    </div>
+  </body>
+<script src="{% static '/scripts/users.js' %}" defer></script>
+</html>
+{% endblock content %}

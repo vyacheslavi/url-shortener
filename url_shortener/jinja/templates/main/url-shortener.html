@@ -1,0 +1,31 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block title %}
+Shortener
+{% endblock title%}
+
+{% block content %}
+<html>
+  <body class="bg-dark">
+    <div class="container-my mt-5 mb-2">
+      <form id="tokenURLForm">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="origURL" class="form-label">Original url</label>
+          <input type="url" name="full_url" class="form-control" id="origURL" aria-describedby="origURL">
+          <div class="form-text">Insert the full url and you'll get the shorted version</div>
+        </div>
+        <input type="hidden" name="short_url_token" value="">
+        <div class="mb-3">
+          <input id="shortURL" class="form-control d-none" type="text" value="Disabled readonly input" aria-label="Disabled input example" disabled readonly>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn">Submit</button>
+      </form>
+      <div class="invalid-feedback-my text-center" id="invalid-fbck"></div>
+        <hr>
+    </div>
+  </body>
+<script src="{% static '/scripts/url-shortener.js' %}" defer></script>
+</html>
+{% endblock content %}
