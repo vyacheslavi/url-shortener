@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.db.models import F
 
 from .models import TokenURL
 
@@ -11,7 +12,7 @@ def get_full_url(token_url: str) -> str:
             raise KeyError("Token is not active")
     except TokenURL.DoesNotExist:
         raise KeyError("This urls does not exist in the database")
-    token.requests_count += 1
+    token.requests_count = F("requests_count") + 1
     token.save()
     return token.full_url
 
