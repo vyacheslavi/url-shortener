@@ -5,7 +5,7 @@
 
 * backend: Django, Django Rest Framework
 
-* bd: SQLite3
+* db: SQLite3
 
 * frontend: Jinja2Templates, CSS, HTML, JavaScript
 
