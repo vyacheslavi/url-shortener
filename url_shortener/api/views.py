@@ -1,12 +1,14 @@
+from django.contrib.auth.models import User
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import mixins
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 
 
-from .serializers import TokenURLSerializer
+from .serializers import TokenURLSerializer, UserTokenSerializer
 from .models import TokenURL
 
 
@@ -17,7 +19,7 @@ class TokenURLViewSet(
     GenericViewSet,
 ):
     model = TokenURL
-    # queryset = TokenURL.objects.all()
+    queryset = TokenURL.objects.all()
     serializer_class = TokenURLSerializer
     permission_classes = [IsAuthenticated]
 
@@ -36,3 +38,12 @@ class TokenURLViewSet(
             )
             return Response(TokenURLSerializer(token).data, status=status_code)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserTokenListAPIView(
+    mixins.ListModelMixin,
+    GenericViewSet,
+):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserTokenSerializer
+    queryset = User.objects.filter(is_active=True)
